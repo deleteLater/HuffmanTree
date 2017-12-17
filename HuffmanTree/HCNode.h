@@ -20,6 +20,9 @@ public:
 		this->lchild = lchild;
 		this->rchild = rchild;
 	}
+	bool isLeaf() {
+		return (this->lchild && this->rchild);
+	}
 	void setChilds(HCNode* lchild, HCNode* rchild) {
 		this->lchild = lchild;
 		this->rchild = rchild;

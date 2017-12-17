@@ -14,6 +14,11 @@ public:
 			('&',lchild->getWeight()+rchild->getWeight(),lchild,rchild)
 			);
 		}
+		//TraversalTree and set LeafNode's coding
+		HCNode* root = mh.deleteMin();
+		while (root) {
+
+		}
 	}
 private:
 	MinHeap mh;
