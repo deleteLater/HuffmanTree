@@ -2,27 +2,36 @@
 // MinHeap.h : the declaration of MinHeap
 
 #include "HCNode.h"
+#include <iostream>
+
+using std::cout;
+using std::endl;
 class MinHeap {
 public:
 	MinHeap(){};
 	MinHeap(HCNode nodes[], int nodesCount) {
 		this->nodes = new HCNode[nodesCount+1]{};	//index 0 won't be used
-		this->curInsertIndex = 1;
-		this->nodesCount = nodesCount;
+		this->nodesCount = 0;
 		for (int i = 1; i < nodesCount+1; i++) {
-			insert(nodes[i - 1]);
+			insert(&nodes[i - 1]);
 		}
 	}
 	~MinHeap() {
 		delete[] nodes;
 	}
-	void insert(HCNode& node) {
-		nodes[curInsertIndex] = node;
-		swim(curInsertIndex++);
+	void insert(HCNode* node) {
+		nodes[++nodesCount] = *node;
+		swim(nodesCount);
 	}
 	HCNode* deleteMin() {
-		HCNode* min = &nodes[1];
+		//"hide" lastMin
 		std::swap(nodes[1], nodes[nodesCount--]);
+		HCNode* min = &nodes[nodesCount + 1];
+		sink(1);
+		return min;
+	}
+	bool greater(int i, int j) {
+		return (nodes[i].compareTo(nodes[j]) > 0);
 	}
 	bool empty() {
 		return nodesCount == 0;
@@ -34,6 +43,7 @@ public:
 		delete[] nodes;
 	}
 private:
+	//sink() and swim() make Heap always Ordered
 	void sink(int pos) {
 		while (2 * pos <= nodesCount) {
 			int child = 2 * pos;
@@ -49,11 +59,7 @@ private:
 			pos /= 2;
 		}
 	}
-	bool greater(int i, int j) {
-		return (nodes[i].compareTo(nodes[j]) > 0);
-	}
 	HCNode* nodes;
 	int nodesCount;
-	int curInsertIndex;
 };
 

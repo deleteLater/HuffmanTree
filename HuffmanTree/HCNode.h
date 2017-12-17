@@ -13,7 +13,7 @@ public:
 		this->lchild = nullptr;
 		this->rchild = nullptr;
 	}
-	HCNode(char value, size_t weigth,
+	HCNode(char value, size_t weight,
 		HCNode* lchild = nullptr, HCNode* rchild = nullptr) {
 		this->value = value;
 		this->weight = weight;
