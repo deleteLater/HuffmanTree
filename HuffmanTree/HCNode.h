@@ -20,23 +20,23 @@ public:
 		this->lchild = lchild;
 		this->rchild = rchild;
 	}
-	bool isLeaf() {
-		return (this->lchild && this->rchild);
-	}
 	void setChilds(HCNode* lchild, HCNode* rchild) {
 		this->lchild = lchild;
 		this->rchild = rchild;
 	}
-	void setCoding(char* coding) {
+	inline void setCoding(string coding) {
 		this->coding = coding;
 	}
-	inline char getValue() {
-		return this->value;
+	inline string getCoding() {
+		return coding;
 	}
 	inline size_t getWeight() {
-		return this->weight;
+		return weight;
 	}
-	string nodeInfo() {
+	inline char getValue() {
+		return value;
+	}
+	string info() {
 		ostringstream oss;
 		oss << "Value: " << this->value << " | Weight: " << this->weight;
 		return oss.str();
@@ -44,10 +44,11 @@ public:
 	inline int compareTo(const HCNode &that) {
 		return (this->weight > that.weight ? 1 : -1);
 	}
+public:
+	HCNode* lchild;
+	HCNode* rchild;
 private:
 	char value;
 	size_t weight;
-	char* coding;
-	HCNode* lchild;
-	HCNode* rchild;
+	string coding;
 };

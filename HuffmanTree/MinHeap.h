@@ -1,5 +1,5 @@
 #pragma once
-// MinHeap.h : the declaration of MinHeap
+// Implements MinHeap for 
 
 #include "HCNode.h"
 #include <iostream>
@@ -10,7 +10,7 @@ class MinHeap {
 public:
 	MinHeap(){};
 	MinHeap(HCNode nodes[], int nodesCount) {
-		this->nodes = new HCNode[nodesCount+1]{};	//index 0 won't be used
+		this->nodes = new HCNode[nodesCount+1]{};
 		this->nodesCount = 0;
 		for (int i = 1; i < nodesCount+1; i++) {
 			insert(&nodes[i - 1]);
@@ -24,11 +24,10 @@ public:
 		swim(nodesCount);
 	}
 	HCNode* deleteMin() {
-		//"hide" lastMin
-		std::swap(nodes[1], nodes[nodesCount--]);
-		HCNode* min = &nodes[nodesCount + 1];
+		std::swap(nodes[1], nodes[nodesCount]);
+		nodesCount--;//nodesCount-- for "hiding" lastMin
 		sink(1);
-		return min;
+		return &nodes[nodesCount+1];
 	}
 	bool greater(int i, int j) {
 		return (nodes[i].compareTo(nodes[j]) > 0);
@@ -41,6 +40,11 @@ public:
 	}
 	void destory() {
 		delete[] nodes;
+	}
+	void printElem(){
+		for (int i = 1; i <= nodesCount; i++) {
+			cout << nodes[i].info()<<"  ";
+		}
 	}
 private:
 	//sink() and swim() make Heap always Ordered
