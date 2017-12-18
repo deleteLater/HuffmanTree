@@ -1,3 +1,3 @@
 # HuffmanTree
-HuffmanTree implements in C++
-Use HuffmanTree to coding
+HuffmanTree implements in C++ and Use HuffmanTree to coding
+
