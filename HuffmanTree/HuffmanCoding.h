@@ -1,5 +1,5 @@
 #pragma once
-#include "MinHeap.h"
+#include "MinHeapForHC.h"
 #include "HCNode.h"
 #include <iostream>
 #include <stack>
@@ -25,33 +25,29 @@ public:
 		s.push(pre);
 		while (root || !s.empty()) {
 			while (root) {
-				root->setCoding(pre->getCoding() + "0");
 				s.push(root);
-				root = root->lchild;
+				if (root != pre)  root->setCoding(pre->getCoding() + "0");
 				pre = root;
+				root = root->lchild;
 			}
 			if (!s.empty()) {
-				root = s.top()->rchild;	
+				root = s.top()->rchild;
+				s.pop();
 				if (root) {
 					root->setCoding(pre->getCoding() + "1");
 					pre = root;
 				}
-				s.pop();
+				else if(!s.empty()){
+					pre = s.top();
+				}
 			}
 		}
 	}
 	~HuffmanCoding() {
-		if (!newNodes.empty())
-			destroy();
-	}
-	void destroy() {
 		root = nullptr;
-		newNodes.clear();
-		newNodes.shrink_to_fit();//vector<HCNode*>().swap(newNodes)
-		mh.destory();
 	}
 private:
 	HCNode* root;
-	MinHeap mh;
+	MinHeapForHC mh;
 	std::vector<HCNode*> newNodes;
 };

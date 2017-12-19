@@ -7,18 +7,21 @@
 
 using std::cout;
 using std::endl;
-class MinHeap {
+class MinHeapForHC {
 public:
-	MinHeap() :nodes(nullptr), nodesCount(NULL) {};
-	MinHeap(std::vector<HCNode*>& nodes) {
-		this->nodes = new HCNode*[nodes.size() + 1]{};
+	MinHeapForHC() :nodes(nullptr), nodesCount(NULL) {};
+	MinHeapForHC(std::vector<HCNode*>& nodes) {
+		this->arrSize = nodes.size() + 1;
+		this->nodes = new HCNode*[arrSize]{};
 		this->nodesCount = 0;
 		for (size_t i = 1; i <= nodes.size(); i++) {
 			insert(nodes[i - 1]);
 		}
 	}
-	~MinHeap() {
-		delete[] nodes;
+	~MinHeapForHC() {
+		for (int i = 1; i < arrSize; i++) {
+			delete nodes[i];
+		}
 	}
 	void insert(HCNode* node) {
 		nodes[++nodesCount] = node;
@@ -39,9 +42,6 @@ public:
 	size_t size() {
 		return nodesCount;
 	}
-	void destory() {
-		delete[] nodes;
-	}
 private:
 	//sink() and swim() make Heap always Ordered
 	void sink(int pos) {
@@ -61,4 +61,6 @@ private:
 	}
 	HCNode** nodes;
 	int nodesCount;
+private:
+	int arrSize;	//for deleteArray
 };

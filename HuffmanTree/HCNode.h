@@ -34,7 +34,7 @@ public:
 	}
 	string info() const{
 		ostringstream oss;
-		oss << "Value: " << this->value << " | Weight: " << this->weight;
+		oss << "Value: " << this->value << " | Weight: " << this->weight << "  |  Coding: "<<this->coding;
 		return oss.str();
 	}
 	int compareTo(HCNode* &that) {
