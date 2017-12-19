@@ -8,6 +8,7 @@ using std::ostringstream;
 class HCNode {
 public:
 	HCNode(){
+		//empty Node
 		this->value = ' ';
 		this->weight = NULL;
 		this->lchild = nullptr;
@@ -15,35 +16,26 @@ public:
 	}
 	HCNode(char value, size_t weight,
 		HCNode* lchild = nullptr, HCNode* rchild = nullptr) {
+		//specify a node
 		this->value = value;
 		this->weight = weight;
 		this->lchild = lchild;
 		this->rchild = rchild;
 	}
-	void setCoding(string coding){
-		this->coding = coding;
-	}
-	string getCoding() {
-		return coding;
-	}
-	size_t getWeight() {
-		return weight;
-	}
-	char getValue() {
-		return value;
-	}
 	string info() const{
+		//return node's info
 		ostringstream oss;
 		oss << "Value: " << this->value << " | Weight: " << this->weight << "  |  Coding: "<<this->coding;
 		return oss.str();
 	}
 	int compareTo(HCNode* &that) {
+		//compare two nodes
 		return (this->weight > that->weight ? 1 : -1);
 	}
 public:
+	//let all data public
 	HCNode* lchild;
 	HCNode* rchild;
-private:
 	char value;
 	size_t weight;
 	string coding;

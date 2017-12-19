@@ -13,20 +13,20 @@ public:
 		while (mh.size() > 1) {
 			HCNode* lchild = mh.deleteMin();
 			HCNode* rchild = mh.deleteMin();
-			HCNode* newNode = new HCNode('&', lchild->getWeight() + rchild->getWeight(), lchild, rchild);
-			newNodes.push_back(newNode);	//for destroy
+			HCNode* newNode = new HCNode('&', lchild->weight + rchild->weight, lchild, rchild);
+			space_reclaimer.push_back(newNode);
 			mh.insert(newNode);
 		}
-		//set Nodes' Coding(PreOrderTrversal)
+		//Set Codings (Use PreOrderTrversal)
 		HCNode* pre = mh.deleteMin();
-		pre->setCoding("");
+		pre->coding = "";
 		root = pre->lchild;
 		std::stack<HCNode*> s;
 		s.push(pre);
 		while (root || !s.empty()) {
 			while (root) {
 				s.push(root);
-				if (root != pre)  root->setCoding(pre->getCoding() + "0");
+				if (root != pre)  root->coding = pre->coding + "0";
 				pre = root;
 				root = root->lchild;
 			}
@@ -34,7 +34,7 @@ public:
 				root = s.top()->rchild;
 				s.pop();
 				if (root) {
-					root->setCoding(pre->getCoding() + "1");
+					root->coding = pre->coding + "1";
 					pre = root;
 				}
 				else if(!s.empty()){
@@ -45,15 +45,15 @@ public:
 		//caculate WPL
 		wpl = 0;
 		for (auto node : nodes) {
-			wpl += (node->getWeight() * node->getCoding().length());
+			wpl += (node->weight * node->coding.length());
 		}
 	}
 	~HuffmanCoding() {
-		for (size_t i = 0; i < newNodes.size(); i++) {
-			delete newNodes[i];
+		for (size_t i = 0; i < space_reclaimer.size(); i++) {
+			delete space_reclaimer[i];
 		}
-		newNodes.clear();
-		newNodes.shrink_to_fit();
+		space_reclaimer.clear();
+		space_reclaimer.shrink_to_fit();
 		mh.~MinHeapForHC();
 	}
 	size_t WPL() {
@@ -62,6 +62,6 @@ public:
 private:
 	HCNode* root;
 	MinHeapForHC mh;
-	std::vector<HCNode*> newNodes;
+	std::vector<HCNode*> space_reclaimer;
 	size_t wpl;
 };

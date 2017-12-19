@@ -27,9 +27,6 @@
     <ClInclude Include="HuffmanCoding.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dataInit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MinHeapForHC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
