@@ -49,7 +49,12 @@ public:
 		}
 	}
 	~HuffmanCoding() {
-		root = nullptr;
+		for (size_t i = 0; i < newNodes.size(); i++) {
+			delete newNodes[i];
+		}
+		newNodes.clear();
+		newNodes.shrink_to_fit();
+		mh.~MinHeapForHC();
 	}
 	size_t WPL() {
 		return wpl;

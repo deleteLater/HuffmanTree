@@ -11,16 +11,16 @@ class MinHeapForHC {
 public:
 	MinHeapForHC() :nodes(nullptr), nodesCount(NULL) {};
 	MinHeapForHC(std::vector<HCNode*>& nodes) {
-		this->arrSize = nodes.size() + 1;
-		this->nodes = new HCNode*[arrSize]{};
+		this->nodes = new HCNode*[nodes.size() + 1]{};
 		this->nodesCount = 0;
 		for (size_t i = 1; i <= nodes.size(); i++) {
 			insert(nodes[i - 1]);
 		}
 	}
 	~MinHeapForHC() {
-		for (int i = 1; i < arrSize; i++) {
-			delete nodes[i];
+		if (nodes) {
+			delete nodes;
+			nodes = nullptr;
 		}
 	}
 	void insert(HCNode* node) {
@@ -61,6 +61,4 @@ private:
 	}
 	HCNode** nodes;
 	int nodesCount;
-private:
-	int arrSize;	//for deleteArray
 };
