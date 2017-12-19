@@ -17,7 +17,7 @@ public:
 			newNodes.push_back(newNode);	//for destroy
 			mh.insert(newNode);
 		}
-		//set Nodes' Coding
+		//set Nodes' Coding(PreOrderTrversal)
 		HCNode* pre = mh.deleteMin();
 		pre->setCoding("");
 		root = pre->lchild;
@@ -42,12 +42,21 @@ public:
 				}
 			}
 		}
+		//caculate WPL
+		wpl = 0;
+		for (auto node : nodes) {
+			wpl += (node->getWeight() * node->getCoding().length());
+		}
 	}
 	~HuffmanCoding() {
 		root = nullptr;
+	}
+	size_t WPL() {
+		return wpl;
 	}
 private:
 	HCNode* root;
 	MinHeapForHC mh;
 	std::vector<HCNode*> newNodes;
+	size_t wpl;
 };
