@@ -20,10 +20,6 @@ public:
 		this->lchild = lchild;
 		this->rchild = rchild;
 	}
-	void setChilds(HCNode* lchild, HCNode* rchild) {
-		this->lchild = lchild;
-		this->rchild = rchild;
-	}
 	void setCoding(string coding) {
 		this->coding = coding;
 	}
@@ -41,8 +37,8 @@ public:
 		oss << "Value: " << this->value << " | Weight: " << this->weight;
 		return oss.str();
 	}
-	int compareTo(const HCNode &that) {
-		return (this->weight > that.weight ? 1 : -1);
+	int compareTo(HCNode* &that) {
+		return (this->weight > that->weight ? 1 : -1);
 	}
 public:
 	HCNode* lchild;
