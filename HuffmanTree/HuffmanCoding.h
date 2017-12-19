@@ -2,37 +2,29 @@
 #include "MinHeap.h"
 #include "HCNode.h"
 #include <iostream>
+#include <vector>
 #include <stack>
 
 class HuffmanCoding {
 public:
 	HuffmanCoding(){}
-	HuffmanCoding(HCNode nodes[],int nodesCount) {
-		MinHeap mh(nodes,nodesCount);
-		cout << "初始化:" << endl;
-		mh.printElem();
-		cout << endl << endl;
+	HuffmanCoding(HCNode nodes[], int nodesCount) {
+		MinHeap mh(nodes, nodesCount);
 		//build HuffmanTree
 		while (mh.size() > 1) {
-			HCNode* lret = mh.deleteMin();
-			HCNode* rret = mh.deleteMin();
-			HCNode* lchild = new HCNode(lret->getValue(),lret->getWeight());
-			HCNode* rchild = new HCNode(rret->getValue(),rret->getWeight());
-			cout << lchild->info() << rchild->info() << endl;
-			HCNode* newNode = new HCNode('&', lchild->getWeight() + rchild->getWeight(), lchild, rchild);
-			cout << newNode->lchild->info() << newNode->rchild->info() << endl;
+			oldNodes.push_back(mh.deleteMin());
+			oldNodes.push_back(mh.deleteMin());
+			HCNode lchild = oldNodes[oldNodes.size() - 2];
+			HCNode rchild = oldNodes[oldNodes.size() - 1];
+			HCNode* newNode = new HCNode('&', lchild.getWeight() + rchild.getWeight(),&lchild,&rchild);
 			mh.insert(newNode);
-			cout << "现在堆中的元素为:\n";
-			mh.printElem();
-			cout << endl << endl;
 		}
-
 		//Traversal
-		root = mh.deleteMin();
-		std::stack<HCNode*> s;
+		root = &mh.deleteMin();
+		std::stack<const HCNode*> s;
 		while (root || !s.empty()) {
 			while (root) {
-				cout << root->getValue();
+				cout << root->info() << endl;
 				s.push(root);
 				root = root->lchild;
 			}
@@ -41,11 +33,8 @@ public:
 				s.pop();
 			}
 		}
-		
 	}
 private:
-	HCNode* root;
-	void destroy() {
-
-	}
+	const HCNode* root;
+	std::vector<HCNode> oldNodes;
 };

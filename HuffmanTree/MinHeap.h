@@ -8,12 +8,12 @@ using std::cout;
 using std::endl;
 class MinHeap {
 public:
-	MinHeap(){};
+	MinHeap():nodes(nullptr),nodesCount(NULL){};
 	MinHeap(HCNode nodes[], int nodesCount) {
 		this->nodes = new HCNode[nodesCount+1]{};
 		this->nodesCount = 0;
 		for (int i = 1; i < nodesCount+1; i++) {
-			insert(&nodes[i - 1]);
+			insert(&nodes[i-1]);
 		}
 	}
 	~MinHeap() {
@@ -23,11 +23,11 @@ public:
 		nodes[++nodesCount] = *node;
 		swim(nodesCount);
 	}
-	HCNode* deleteMin() {
+	HCNode deleteMin() {
 		std::swap(nodes[1], nodes[nodesCount]);
-		nodesCount--;//nodesCount-- for "hiding" lastMin
+		nodesCount--;
 		sink(1);
-		return &nodes[nodesCount+1];
+		return nodes[nodesCount + 1];
 	}
 	bool greater(int i, int j) {
 		return (nodes[i].compareTo(nodes[j]) > 0);
@@ -40,11 +40,6 @@ public:
 	}
 	void destory() {
 		delete[] nodes;
-	}
-	void printElem(){
-		for (int i = 1; i <= nodesCount; i++) {
-			cout << nodes[i].info()<<"  ";
-		}
 	}
 private:
 	//sink() and swim() make Heap always Ordered

@@ -24,24 +24,24 @@ public:
 		this->lchild = lchild;
 		this->rchild = rchild;
 	}
-	inline void setCoding(string coding) {
+	void setCoding(string coding) {
 		this->coding = coding;
 	}
-	inline string getCoding() {
+	string getCoding() {
 		return coding;
 	}
-	inline size_t getWeight() {
+	size_t getWeight() {
 		return weight;
 	}
-	inline char getValue() {
+	char getValue() {
 		return value;
 	}
-	string info() {
+	string info() const{
 		ostringstream oss;
 		oss << "Value: " << this->value << " | Weight: " << this->weight;
 		return oss.str();
 	}
-	inline int compareTo(const HCNode &that) {
+	int compareTo(const HCNode &that) {
 		return (this->weight > that.weight ? 1 : -1);
 	}
 public:
