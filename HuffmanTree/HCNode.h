@@ -20,7 +20,7 @@ public:
 		this->lchild = lchild;
 		this->rchild = rchild;
 	}
-	void setCoding(string coding) {
+	void setCoding(string coding){
 		this->coding = coding;
 	}
 	string getCoding() {

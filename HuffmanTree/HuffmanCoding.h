@@ -8,29 +8,50 @@
 class HuffmanCoding {
 public:
 	HuffmanCoding(){}
-	HuffmanCoding(const std::vector<HCNode*>& nodes) {
-		MinHeap mh(nodes);
+	HuffmanCoding(std::vector<HCNode*> nodes) :mh(nodes) {
 		//build HuffmanTree
 		while (mh.size() > 1) {
 			HCNode* lchild = mh.deleteMin();
 			HCNode* rchild = mh.deleteMin();
-			mh.insert(new HCNode('&',lchild->getWeight()+rchild->getWeight(),lchild,rchild));
+			HCNode* newNode = new HCNode('&', lchild->getWeight() + rchild->getWeight(), lchild, rchild);
+			newNodes.push_back(newNode);	//for destroy
+			mh.insert(newNode);
 		}
-		//Traversal
-		root = mh.deleteMin();
-		std::stack<const HCNode*> s;
+		//set Nodes' Coding
+		HCNode* pre = mh.deleteMin();
+		pre->setCoding("");
+		root = pre->lchild;
+		std::stack<HCNode*> s;
+		s.push(pre);
 		while (root || !s.empty()) {
 			while (root) {
-				cout << root->info() << endl;
+				root->setCoding(pre->getCoding() + "0");
 				s.push(root);
 				root = root->lchild;
+				pre = root;
 			}
 			if (!s.empty()) {
-				root = s.top()->rchild;
+				root = s.top()->rchild;	
+				if (root) {
+					root->setCoding(pre->getCoding() + "1");
+					pre = root;
+				}
 				s.pop();
 			}
 		}
 	}
+	~HuffmanCoding() {
+		if (!newNodes.empty())
+			destroy();
+	}
+	void destroy() {
+		root = nullptr;
+		newNodes.clear();
+		newNodes.shrink_to_fit();//vector<HCNode*>().swap(newNodes)
+		mh.destory();
+	}
 private:
-	const HCNode* root;
+	HCNode* root;
+	MinHeap mh;
+	std::vector<HCNode*> newNodes;
 };

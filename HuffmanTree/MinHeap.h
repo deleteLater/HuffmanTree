@@ -10,7 +10,7 @@ using std::endl;
 class MinHeap {
 public:
 	MinHeap() :nodes(nullptr), nodesCount(NULL) {};
-	MinHeap(const std::vector<HCNode*>& nodes) {
+	MinHeap(std::vector<HCNode*>& nodes) {
 		this->nodes = new HCNode*[nodes.size() + 1]{};
 		this->nodesCount = 0;
 		for (size_t i = 1; i <= nodes.size(); i++) {
