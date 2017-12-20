@@ -1,0 +1,8 @@
+Value	Weight
+  a       19
+  b       21
+  c       10
+  e       32
+  g       50
+  f       24
+  n       35

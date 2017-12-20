@@ -17,7 +17,7 @@ public:
 			space_reclaimer.push_back(newNode);
 			mh.insert(newNode);
 		}
-		//Set Codings (Use PreOrderTrversal)
+		//Set Codings (Use PreOrderTrversal's Thought)
 		HCNode* pre = mh.deleteMin();
 		pre->coding = "";
 		root = pre->lchild;
