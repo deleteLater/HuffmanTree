@@ -9,20 +9,20 @@
 
 class HuffmanCoding {
 public:
-	HuffmanCoding(){}
+	HuffmanCoding() {}
 	HuffmanCoding(std::vector<HCNode*> nodes) :mh(nodes) {
 		encode();
 		//caculate WPL
 		wpl = 0;
 		for (auto node : nodes) {
 			codingLens.push_back(node->coding.length());
-			nodes_map.insert(std::pair<char,string>(node->value,node->coding));
+			nodes_map.insert(std::pair<char, string>(node->value, node->coding));
 			wpl += (node->weight * node->coding.length());
 		}
 		//deal with vector(codingLen)
 		//vector deweighting
-		std::sort(codingLens.begin(),codingLens.end());
-		codingLens.erase(std::unique(codingLens.begin(),codingLens.end()),codingLens.end());
+		std::sort(codingLens.begin(), codingLens.end());
+		codingLens.erase(std::unique(codingLens.begin(), codingLens.end()), codingLens.end());
 		//adjust size
 		codingLens.shrink_to_fit();
 	}
@@ -83,12 +83,12 @@ public:
 						return string();
 					}
 					continue;
-				}	
+				}
 				else {
 					i += codingLens[j];
-					ret.append(string(1,ch));
+					ret.append(string(1, ch));
 					break;
-				}		
+				}
 			}
 		}
 		return ret;
@@ -97,12 +97,12 @@ public:
 		return wpl;
 	}
 private:
-	HCNode* root;
+	HCNode * root;
 	MinHeapForHC mh;
 	std::vector<HCNode*> space_reclaimer;
 	size_t wpl;
 	std::vector<size_t> codingLens;
-	std::map<char,string> nodes_map;
+	std::map<char, string> nodes_map;
 	char searchMap(string str) {
 		for (auto x : nodes_map) {
 			if (x.second == str) {

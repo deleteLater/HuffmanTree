@@ -16,7 +16,7 @@ public:
 		}
 	}
 	~MinHeapForHC() {
-		//free memory 
+		//free memory
 		if (heap_ptr) {
 			delete heap_ptr;
 			heap_ptr = nullptr;
@@ -30,7 +30,7 @@ public:
 	HCNode* deleteMin() {
 		//'hide' MinValue and return it
 		std::swap(heap_ptr[1], heap_ptr[counter]);
-		counter--;												
+		counter--;
 		sink(1);
 		return heap_ptr[counter + 1];
 	}

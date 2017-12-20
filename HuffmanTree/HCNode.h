@@ -7,7 +7,7 @@ using std::ostringstream;
 
 class HCNode {
 public:
-	HCNode(){
+	HCNode() {
 		//empty Node
 		this->value = ' ';
 		this->weight = NULL;
@@ -22,10 +22,10 @@ public:
 		this->lchild = lchild;
 		this->rchild = rchild;
 	}
-	string info() const{
+	string info() const {
 		//return node's info
 		ostringstream oss;
-		oss << "Value: " << this->value << " | Weight: " << this->weight << "  |  Coding: "<<this->coding;
+		oss << "Value: " << this->value << " | Weight: " << this->weight << "  |  Coding: " << this->coding;
 		return oss.str();
 	}
 	int compareTo(HCNode* &that) {
@@ -34,7 +34,7 @@ public:
 	}
 public:
 	//let all data public
-	HCNode* lchild;
+	HCNode * lchild;
 	HCNode* rchild;
 	char value;
 	size_t weight;
