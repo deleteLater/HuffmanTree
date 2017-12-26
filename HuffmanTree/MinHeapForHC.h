@@ -18,7 +18,7 @@ public:
 	~MinHeapForHC() {
 		//free memory
 		if (heap_ptr) {
-			delete heap_ptr;
+			delete[] heap_ptr;
 			heap_ptr = nullptr;
 		}
 	}

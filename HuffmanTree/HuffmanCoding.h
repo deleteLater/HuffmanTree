@@ -71,7 +71,7 @@ public:
 	}
 	string decode(string binary_str) {
 		string ret("");
-		string cmpstr = "";
+		string cmpstr("");
 		char ch;
 		for (size_t i = 0; i < binary_str.length(); ) {
 			for (size_t j = 0; j < codingLens.size(); j++) {
